@@ -1,0 +1,1 @@
+cmd_dest/include/linux/spi/.install := perl scripts/headers_install.pl dest/include/linux/spi x86  /mnt/lfs/sources/linux-3.8.1/include/uapi/linux/spi/spidev.h ; for F in ; do echo "\#include <asm-generic/$$F>" > dest/include/linux/spi/$$F; done; touch dest/include/linux/spi/.install

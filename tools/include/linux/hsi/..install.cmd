@@ -1,0 +1,1 @@
+cmd_dest/include/linux/hsi/.install := perl scripts/headers_install.pl dest/include/linux/hsi x86  /mnt/lfs/sources/linux-3.8.1/include/uapi/linux/hsi/hsi_char.h ; for F in ; do echo "\#include <asm-generic/$$F>" > dest/include/linux/hsi/$$F; done; touch dest/include/linux/hsi/.install

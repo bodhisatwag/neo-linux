@@ -1,0 +1,1 @@
+cmd_dest/include/video/.install := perl scripts/headers_install.pl dest/include/video x86  /mnt/lfs/sources/linux-3.8.1/include/video/edid.h  /mnt/lfs/sources/linux-3.8.1/include/video/sisfb.h  /mnt/lfs/sources/linux-3.8.1/include/video/uvesafb.h ; for F in ; do echo "\#include <asm-generic/$$F>" > dest/include/video/$$F; done; touch dest/include/video/.install

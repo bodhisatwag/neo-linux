@@ -1,0 +1,57 @@
+Submitted By:      Pierre Labastie <pierre dot labastie at neuf dot fr>
+Date:              2012-12-28
+Initial Package Version: 2.23.1
+Upstream Status:   Already included in 2.23 CVS branch
+Origin:            Upstream
+Description:       Fixes a failure in ld tests
+
+diff -Naur binutils-2.23.1.orig/ld/testsuite/ld-elf/shared.exp binutils-2.23.1/ld/testsuite/ld-elf/shared.exp
+--- binutils-2.23.1.orig/ld/testsuite/ld-elf/shared.exp	2012-07-10 04:51:53.000000000 +0000
++++ binutils-2.23.1/ld/testsuite/ld-elf/shared.exp	2012-12-31 18:44:06.000000000 +0000
+@@ -336,14 +336,14 @@
+    {del.cc new.cc} {} "libnew1b.so" "c++"}
+ }
+ 
+-set run_cxx_tests {
+-    {"Run with libdl3a.so"
+-     "-Wl,--no-as-needed tmpdir/libdl3a.so" ""
+-     {dl3main.cc} "dl3a" "dl3a.out" "" "c++"}
+ # "-shared -Bsymbolic" only works with gcc 4.5.0 and newer.
+ #    {"Run with libdl3b.so"
+ #     "tmpdir/libdl3b.so" ""
+ #     {dl3main.cc} "dl3b" "dl3b.out" "" "c++"}
++set run_cxx_tests {
++    {"Run with libdl3a.so"
++     "-Wl,--no-as-needed tmpdir/libdl3a.so" ""
++     {dl3main.cc} "dl3a" "dl3a.out" "" "c++"}
+     {"Run with libdl3c.so"
+      "-Wl,--no-as-needed tmpdir/libdl3c.so" ""
+      {dl3main.cc} "dl3c" "dl3a.out" "" "c++"}
+diff -Naur binutils-2.23.1.orig/ld/testsuite/lib/ld-lib.exp binutils-2.23.1/ld/testsuite/lib/ld-lib.exp
+--- binutils-2.23.1.orig/ld/testsuite/lib/ld-lib.exp	2012-09-04 14:16:44.000000000 +0000
++++ binutils-2.23.1/ld/testsuite/lib/ld-lib.exp	2012-12-31 18:36:30.000000000 +0000
+@@ -1244,7 +1244,6 @@
+ #	verbose -log "ld_options is $ld_options"
+ #	verbose -log "as_options is $as_options"
+ #	verbose -log "src_files is $src_files"
+-#	verbose -log "actions is $actions"
+ #	verbose -log "binfile is $binfile"
+ 
+ 	# Assemble each file in the test.
+@@ -1261,7 +1260,7 @@
+ 	    } else {
+ 		ld_compile "$CC -c $CFLAGS $cflags" $srcdir/$subdir/$src_file $objfile
+ 	    }
+-
++        }
+ 	    # We have to use $CC to build PIE and shared library.
+ 	    if { [ string match "c" $lang ] } {
+ 		set link_proc ld_simple_link
+@@ -1323,7 +1322,6 @@
+ 		set errcnt 0
+ 		pass $testname
+ 	    }
+-	}
+     }
+ }
+ 

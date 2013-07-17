@@ -1,0 +1,1 @@
+cmd_dest/include/uapi/.install := perl scripts/headers_install.pl dest/include/uapi x86  ; for F in ; do echo "\#include <asm-generic/$$F>" > dest/include/uapi/$$F; done; touch dest/include/uapi/.install

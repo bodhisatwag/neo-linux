@@ -1,0 +1,1 @@
+cmd_dest/include/linux/wimax/.install := perl scripts/headers_install.pl dest/include/linux/wimax x86  /mnt/lfs/sources/linux-3.8.1/include/uapi/linux/wimax/i2400m.h ; for F in ; do echo "\#include <asm-generic/$$F>" > dest/include/linux/wimax/$$F; done; touch dest/include/linux/wimax/.install
